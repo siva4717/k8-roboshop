@@ -26,7 +26,8 @@ spec:
     spec: 
       containers:
       - name: mongodb
-        image: joindevops/mongodb:v1
+        image: joindevops/mongodb:
+        imagePullPolicy: always
       readinessProbe:
         tcpSocket:
           port: 27017
@@ -37,3 +38,20 @@ spec:
           port: 27017
         initialDelaySeconds: 10
         periodSeconds: 10
+
+
+#service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    project: roboshop
+    component: frontend
+    tier: db
+  ports:
+    - protocal: TCP
+      port: 27017 #service port
+      targetPort: 27017 #container port
