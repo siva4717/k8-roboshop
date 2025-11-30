@@ -3,27 +3,27 @@ kind: Deployment
 metadata:
   name: redis
   namespace: roboshop
-  # these labels are replica set labels
+  # these are replica set labels
   labels:
+    project: roboshop
     component: redis
     tier: db
-    project: roboshop
 spec:
   replicas: 1
   selector:
     # these labels are used to select pods
     matchLabels:
+      project: roboshop
       component: redis
       tier: db
-      project: roboshop
   # pod definition
   template:
     metadata:
       labels:
+        project: roboshop
         component: redis
         tier: db
-        project: roboshop
-    spec: 
+    spec:
       containers:
       - name: redis
         image: redis:7.0
@@ -36,12 +36,9 @@ spec:
         livenessProbe:
           tcpSocket:
             port: 6379
-          initialDelaySeconds: 10
-          periodSeconds: 10
-
+          initialDelaySeconds: 5
+          periodSeconds: 5
 ---
-#service
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -49,10 +46,10 @@ metadata:
   namespace: roboshop
 spec:
   selector:
+    project: roboshop
     component: redis
     tier: db
-    project: roboshop
   ports:
-    - protocal: TCP
-      port: 6379 #service port
-      targetPort: 6379 #container port
+    - protocol: TCP
+      port: 6379 # service port
+      targetPort: 6379 # container port
