@@ -49,9 +49,9 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    project: roboshop
     component: redis
     tier: db
+    project: roboshop
   ports:
     - protocal: TCP
       port: 6379 #service port
