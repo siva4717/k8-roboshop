@@ -55,7 +55,7 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    component: frontend
+    component: rabbitmq
     tier: db
     project: roboshop
   ports:
