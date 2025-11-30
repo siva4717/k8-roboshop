@@ -1,43 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: frontend
   namespace: roboshop
   # these labels are replica set labels
   labels:
-  component: mongodb
-  tier: db
+  component: frontend
+  tier: frontend
   project: roboshop
 spec:
   replicas: 1
   selector:
     # these labels are used to select pods
     matchLables:
-      component: mongodb
-      tier: db
+      component: frontend
+      tier: frontend
       project: roboshop
   # pod definition
   template:
     metadata:
       labels:
-        component: mongodb
-        tier: db
+        component: frontend
+        tier: frontend
         project: roboshop
     spec: 
       containers:
-      - name: mongodb
-        image: joindevops/mongodb:v1
+      - name: frontend
+        image: joindevops/frontend:v1
         imagePullPolicy: Always
       readinessProbe:
         tcpSocket:
-          port: 27017
-        initialDelaySeconds: 10
+          port: 80
+        initialDelaySeconds: 15
         periodSeconds: 10
       livenessProbe:
         tcpSocket:
-          port: 27017
-        initialDelaySeconds: 10
-        periodSeconds: 10
+          port: 80
+        initialDelaySeconds: 20
+        periodSeconds: 5
 
 ---
 #service
@@ -45,13 +45,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb
+  name: frontend
 spec:
+  type: LoadBalancer
   selector:
     project: roboshop
     component: frontend
-    tier: db
+    tier: frontend
   ports:
     - protocal: TCP
-      port: 27017 #service port
-      targetPort: 27017 #container port
+      port: 80 #service port
+      targetPort: 80 #container port
