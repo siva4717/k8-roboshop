@@ -28,16 +28,16 @@ spec:
       - name: redis
         image: redis:7.0
         imagePullPolicy: Always
-      readinessProbe:
-        tcpSocket:
-          port: 6379
-        initialDelaySeconds: 10
-        periodSeconds: 10
-      livenessProbe:
-        tcpSocket:
-          port: 6379
-        initialDelaySeconds: 10
-        periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 10
+          periodSeconds: 10
 
 ---
 #service
