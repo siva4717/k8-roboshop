@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cart
+  namespace: roboshop
 data:
   REDIS_HOST: "redis"
   CATALOGUE_HOST: "catalogue"
@@ -59,6 +60,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cart
+  namespace: roboshop
 spec:
   selector:
     component: cart
