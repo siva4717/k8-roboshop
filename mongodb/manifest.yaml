@@ -5,9 +5,9 @@ metadata:
   namespace: roboshop
   # these labels are replica set labels
   labels:
-  component: mongodb
-  tier: db
-  project: roboshop
+    component: mongodb
+    tier: db
+    project: roboshop
 spec:
   replicas: 1
   selector:
