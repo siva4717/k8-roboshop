@@ -28,16 +28,18 @@ spec:
       - name: frontend
         image: joindevops/frontend:v1
         imagePullPolicy: Always
-      readinessProbe:
-        tcpSocket:
-          port: 80
-        initialDelaySeconds: 15
-        periodSeconds: 10
-      livenessProbe:
-        tcpSocket:
-          port: 80
-        initialDelaySeconds: 20
-        periodSeconds: 5
+        readinessProbe:
+            httpGet:
+              path: /
+              port: liveness-port
+            failureThreshold: 1
+            periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /
+            port: liveness-port
+          failureThreshold: 1
+          periodSeconds: 15
 
 ---
 #service
