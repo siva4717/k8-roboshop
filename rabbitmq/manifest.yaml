@@ -5,9 +5,9 @@ metadata:
   namespace: roboshop
   # these labels are replica set labels
   labels:
-  component: rabbitmq
-  tier: db
-  project: roboshop
+    component: rabbitmq
+    tier: db
+    project: roboshop
 spec:
   replicas: 1
   selector:
@@ -33,16 +33,16 @@ spec:
           value: roboshop
         - name: RABBITMQ_DEFAULT_PASS
           value: roboshop123
-      readinessProbe:
-        tcpSocket:
-          port: 5672
-        initialDelaySeconds: 10
-        periodSeconds: 10
-      livenessProbe:
-        tcpSocket:
-          port: 5672
-        initialDelaySeconds: 10
-        periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 10
+          periodSeconds: 10
 
 ---
 #service
