@@ -20,7 +20,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLables:
+    matchLabels:
       component: cart
       project: roboshop
       tier: backend
@@ -36,7 +36,7 @@ spec:
         image: joindevops/cart:v1
         imagePullPolicy: Always
         envForm:
-          configMapRef:
+        - configMapRef:
             name: cart
         ports:
         - name: liveness-port
@@ -67,6 +67,6 @@ spec:
     project: roboshop
     tier: backend 
   ports:
-    - protocal: TCP
+    - protocol: TCP
       port: 8080 #service port
       targetPort: 8080 #container port

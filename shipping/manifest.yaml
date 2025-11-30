@@ -7,7 +7,7 @@ data:
   CART_ENDPOINT: "cart:8080"
   DB_HOST: "mysql"
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: shipping
@@ -19,7 +19,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLables:
+    matchLabels:
       component: shipping
       project: roboshop
       tier: backend
@@ -35,7 +35,7 @@ spec:
         image: joindevops/shipping:v1
         imagePullPolicy: Always
         envForm:
-          configMapRef:
+        - configMapRef:
             name: shipping
         ports:
         - name: liveness-port
@@ -65,6 +65,6 @@ spec:
     project: roboshop
     tier: backend 
   ports:
-    - protocal: TCP
+    - protocol: TCP
       port: 8080 #service port
       targetPort: 8080 #container port
