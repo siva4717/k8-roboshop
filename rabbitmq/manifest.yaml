@@ -1,4 +1,5 @@
 apiVersion: apps/v1
+
 kind: Deployment
 metadata:
   name: rabbitmq
@@ -54,9 +55,9 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    project: roboshop
     component: frontend
     tier: db
+    project: roboshop
   ports:
     - protocal: TCP
       port: 5672 #service port
