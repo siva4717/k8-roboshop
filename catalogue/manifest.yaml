@@ -35,8 +35,8 @@ spec:
         image: joindevops/catalogue:v1
         imagePullPolicy: Always
         envForm:
-          configMapRef:
-            name: catalogue
+        - configMapRef:
+          name: catalogue
         ports:
         - name: liveness-port
           containerPort: 8080
