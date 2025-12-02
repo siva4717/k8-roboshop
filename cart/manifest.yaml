@@ -35,7 +35,7 @@ spec:
       - name: cart
         image: joindevops/cart:v1
         imagePullPolicy: Always
-        envForm:
+        envFrom:
         - configMapRef:
             name: cart
         ports:
