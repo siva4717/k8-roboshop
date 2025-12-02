@@ -1,49 +1,50 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
   namespace: roboshop
-  # these labels are replica set labels
+  # these are replica set labels
   labels:
+    project: roboshop
     component: frontend
     tier: frontend
-    project: roboshop
 spec:
   replicas: 1
   selector:
     # these labels are used to select pods
     matchLabels:
+      project: roboshop
       component: frontend
       tier: frontend
-      project: roboshop
   # pod definition
   template:
     metadata:
       labels:
+        project: roboshop
         component: frontend
         tier: frontend
-        project: roboshop
-    spec: 
+    spec:
       containers:
       - name: frontend
         image: joindevops/frontend:v1
         imagePullPolicy: Always
+        ports:
+        - name: liveness-port
+          containerPort: 80
         readinessProbe:
-            httpGet:
-              path: /
-              port: liveness-port
-            failureThreshold: 1
-            periodSeconds: 15
+          httpGet:
+            path: /
+            port: liveness-port
+          failureThreshold: 1
+          periodSeconds: 15
         livenessProbe:
           httpGet:
             path: /
             port: liveness-port
           failureThreshold: 1
           periodSeconds: 15
-
 ---
-#service
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -57,5 +58,5 @@ spec:
     tier: frontend
   ports:
     - protocol: TCP
-      port: 80 #service port
-      targetPort: 80 #container port
+      port: 80 # service port
+      targetPort: 80 # container port
