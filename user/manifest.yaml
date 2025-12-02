@@ -35,7 +35,7 @@ spec:
       - name: user
         image: joindevops/user:v1
         imagePullPolicy: Always
-        envForm:
+        envFrom:
         - configMapRef:
             name: user
         ports:
