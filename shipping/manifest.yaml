@@ -34,7 +34,7 @@ spec:
       - name: shipping
         image: joindevops/shipping:v1
         imagePullPolicy: Always
-        envForm:
+        envFrom:
         - configMapRef:
             name: shipping
         ports:
