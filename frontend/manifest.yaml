@@ -5,14 +5,14 @@ metadata:
   namespace: roboshop
   # these labels are replica set labels
   labels:
-  component: frontend
-  tier: frontend
-  project: roboshop
+    component: frontend
+    tier: frontend
+    project: roboshop
 spec:
   replicas: 1
   selector:
     # these labels are used to select pods
-    matchLables:
+    matchLabels:
       component: frontend
       tier: frontend
       project: roboshop
